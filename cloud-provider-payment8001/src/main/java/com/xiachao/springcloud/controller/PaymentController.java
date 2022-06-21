@@ -16,8 +16,8 @@ public class PaymentController {
     @Autowired
     private PaymentService paymentService;
 
-    @PostMapping("/createPayment")
-    public CommonResult createPayment(@RequestBody Payment payment){
+    @PostMapping("/create")
+    public CommonResult createPayment(@RequestBody  Payment payment){
         int result = paymentService.createPayment(payment);
         log.info("*****插入操作返回结果:" + result);
 
@@ -28,7 +28,7 @@ public class PaymentController {
         }
     }
 
-    @GetMapping(value = "/getPayment/{id}")
+    @GetMapping(value = "/get/{id}")
     public CommonResult<Payment> ById(@PathVariable("id") Long id){
         Payment payment = paymentService.getPaymentById(id);
         log.info("*****查询结果:{}",payment);
