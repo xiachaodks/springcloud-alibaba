@@ -1,7 +1,5 @@
 package com.xiachao.springcloud.controller;
 
-import com.netflix.appinfo.InstanceInfo;
-import com.netflix.discovery.shared.Applications;
 import com.xiachao.springcloud.entities.CommonResult;
 import com.xiachao.springcloud.entities.Payment;
 import com.xiachao.springcloud.service.PaymentService;
@@ -12,7 +10,6 @@ import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 
@@ -68,9 +65,16 @@ public class PaymentController {
         return this.discoveryClient;
     }
 
+    //增加方法测试负载均衡
     @GetMapping(value = "/lb")
     public String getPaymentLB() {
         return this.serverPort;
     }
 
+
+    // ====================> zipkin+sleuth
+    @GetMapping("/zipkin")
+    public String paymentZipkin(){
+        return "hi ,i'am paymentzipkin server fall back，welcome，O(∩_∩)O哈哈~";
+    }
 }
